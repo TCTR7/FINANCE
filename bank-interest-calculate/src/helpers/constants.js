@@ -2,6 +2,7 @@ module.exports = Object.freeze({
   CALCULATING_LOAN_INTEREST: "Calculating loan interest",
   CALCULATING_DEPOSIT_INTEREST: "Calculating deposit interest",
   NUMBER_OF_MONTH_IN_YEAR: 12,
+  NUMBER_OF_WEEK_IN_YEAR: 52,
   DEPOSIT_TYPE: {
     DEPOSIT_BY_1WEEK: "1 week",
     DEPOSIT_BY_2WEEK: "2 week",

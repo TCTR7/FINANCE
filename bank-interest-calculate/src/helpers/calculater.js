@@ -34,14 +34,8 @@ function getLoanData(
 }
 
 function getInterestRateByWeek(numberOfWeek, interestRate) {
-  let d = new Date();
-  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const numberOfWeekInCurrentYear = Math.ceil(
-    ((d - yearStart) / 86400000 + 1) / 7
-  );
-  const result = (interestRate * numberOfWeek) / numberOfWeekInCurrentYear ;
+  const result = (interestRate * numberOfWeek) / Constants.NUMBER_OF_WEEK_IN_YEAR ;
+  console.log("result: ", result)
   return result;
 }
 
