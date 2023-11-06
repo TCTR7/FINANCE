@@ -3,24 +3,33 @@ function getLoanData(
   money,
   rate,
   year,
+  monthlyPayment,
   floatingInterest,
   numberOfPreferentialYears
 ) {
   let numberOfMonth = year * Constants.NUMBER_OF_MONTH_IN_YEAR;
-  let principalMoney = money / numberOfMonth;
+  // let principalMoney = money / numberOfMonth;
   let ratePerMonth = rate / Constants.NUMBER_OF_MONTH_IN_YEAR;
   let data = [];
   let totalInterest = 0;
   const endOfPreferentialTime =
     numberOfPreferentialYears * Constants.NUMBER_OF_MONTH_IN_YEAR + 1;
   for (let index = 1; index <= numberOfMonth; index++) {
+    if(money <= 0) break;
     if (index === endOfPreferentialTime) {
       rate += floatingInterest;
       ratePerMonth = rate / Constants.NUMBER_OF_MONTH_IN_YEAR;
     }
     let moneyByRatePerMonth = (money * ratePerMonth) / 100;
+    let principalMoney = monthlyPayment - moneyByRatePerMonth;
+    if(money <= monthlyPayment){
+      principalMoney = money - moneyByRatePerMonth
+      money = 0;
+    }
+    else {
+      money = money - principalMoney;
+    }
     totalInterest += moneyByRatePerMonth;
-    money = money - principalMoney;
     const loanInformation = {
       month: index,
       principalMoney: principalMoney.toFixed(3),

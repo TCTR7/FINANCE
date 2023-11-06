@@ -36,11 +36,10 @@ export default function LoanResultTable(props) {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="center">Month</StyledTableCell>
-              <StyledTableCell align="center">Principal money&nbsp;(vnd)</StyledTableCell>
-              <StyledTableCell align="center">Interest money&nbsp;(vnd)</StyledTableCell>
-              <StyledTableCell align="center">Monthly payment&nbsp;(vnd)</StyledTableCell>
-              <StyledTableCell align="center">Money still owed&nbsp;(vnd)</StyledTableCell>
+              <StyledTableCell align="center">Tháng</StyledTableCell>
+              <StyledTableCell align="center">Tiền gốc phải trả&nbsp;(vnd)</StyledTableCell>
+              <StyledTableCell align="center">Tiền lãi phải trả&nbsp;(vnd)</StyledTableCell>
+              <StyledTableCell align="center">Số tiền còn nợ&nbsp;(vnd)</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -51,7 +50,6 @@ export default function LoanResultTable(props) {
                 </StyledTableCell>
                 <StyledTableCell align="center">{row.principalMoney}</StyledTableCell>
                 <StyledTableCell align="center">{row.interestMoney}</StyledTableCell>
-                <StyledTableCell align="center">{row.monthlyPayment}</StyledTableCell>
                 <StyledTableCell align="center">{row.moneyStillOwed}</StyledTableCell>
               </StyledTableRow>
             ))}

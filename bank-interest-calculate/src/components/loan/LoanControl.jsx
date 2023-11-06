@@ -12,6 +12,7 @@ const getFreshModel = () => ({
   loan: 0,
   loanInterestRate: 0,
   loanTerm: 0,
+  monthlyPayment: 0,
   floatingInterest: 0,
   numberOfPreferentialYears: 0,
 });
@@ -30,6 +31,7 @@ export default function LoanControl(props) {
                                 Number(values.loan),
                                 Number(values.loanInterestRate),
                                 Number(values.loanTerm),
+                                Number(values.monthlyPayment),
                                 Number(values.floatingInterest),
                                 Number(values.numberOfPreferentialYears));
     console.log(result)
@@ -43,6 +45,8 @@ export default function LoanControl(props) {
       values.loanInterestRate > 0 ? "" : "This field must be positive ";
     tempModel.loanTerm =
       values.loanTerm > 0 ? "" : "This field must be positive ";
+    tempModel.monthlyPayment =
+      values.loanTerm > 0 ? "" : "This field must be positive ";
     setErrors(tempModel);
     return Object.values(tempModel).every((x) => x === "");
   };
@@ -52,12 +56,12 @@ export default function LoanControl(props) {
       direction="row"
       alignItems="center"
       justifyContent="center"
-      width="90%"
+      width="97%"
       style={{ marginBottom: 20 }}
     >
       <TextField
-        style={{ margin: 5 }}
-        label="Loan (vnd)"
+        style={{ margin: 3 }}
+        label="Tiền vay (vnd)"
         name="loan"
         variant="outlined"
         value={values.loan}
@@ -65,8 +69,8 @@ export default function LoanControl(props) {
         {...(errors.loan && { error: true, helperText: errors.loan })}
       ></TextField>
       <TextField
-        style={{ margin: 5, width: "10%" }}
-        label="Loan Interest Rate (%)"
+        style={{ margin: 3, width: "7%" }}
+        label="lãi suất (%)"
         name="loanInterestRate"
         variant="outlined"
         value={values.loanInterestRate}
@@ -77,8 +81,8 @@ export default function LoanControl(props) {
         })}
       ></TextField>
       <TextField
-        style={{ margin: 5, width: "10%" }}
-        label="Loan Term"
+        style={{ margin: 3, width: "7%" }}
+        label="thời hạn vay (năm)"
         name="loanTerm"
         variant="outlined"
         value={values.loanTerm}
@@ -86,7 +90,16 @@ export default function LoanControl(props) {
         {...(errors.loanTerm && { error: true, helperText: errors.loanTerm })}
       ></TextField>
       <TextField
-        style={{ margin: 5 }}
+        style={{ margin: 3}}
+        label="Trả hàng tháng"
+        name="monthlyPayment"
+        variant="outlined"
+        value={values.monthlyPayment}
+        onChange={handleInputChange}
+        {...(errors.monthlyPayment && { error: true, helperText: errors.monthlyPayment })}
+      ></TextField>
+      <TextField
+      style={{ margin: 3, width: "7%" }}
         label="Number of preferential years"
         name="numberOfPreferentialYears"
         variant="outlined"
@@ -94,7 +107,7 @@ export default function LoanControl(props) {
         onChange={handleInputChange}
       ></TextField>
       <TextField
-        style={{ margin: 5, width: "10%" }}
+        style={{ margin: 3, width: "10%" }}
         label="Floating Interest (%)"
         name="floatingInterest"
         variant="outlined"
