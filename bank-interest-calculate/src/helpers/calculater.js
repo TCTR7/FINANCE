@@ -111,6 +111,15 @@ function getDepositData(money, interestRate, term, depositType) {
   return { data: data, totalInterest: totalInterest.toFixed(3) };
 }
 
-const calculater = { getLoanData, getDepositData };
+const getMinimumMonthlyPayment = (loan, loanTerm, loanInterestRate) => {
+  const monthlyInterestRate = loanInterestRate / (12 * 100)
+  const numberOfPayments = loanTerm * 12;
+  const emi = loan * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+  (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+
+  return Math.ceil(emi);
+}
+
+const calculater = { getLoanData, getDepositData, getMinimumMonthlyPayment };
 
 export default calculater;

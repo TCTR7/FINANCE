@@ -9,26 +9,29 @@ import { Button } from "@mui/material";
 function App() {
   const pdfExportComponent = useRef(null);
   const exportHandle = () => {
-    pdfExportComponent.current.save();
+    console.log("exportHandle", pdfExportComponent.current)
+    if (pdfExportComponent.current) {
+      console.log("pdfExportComponent.current: ", pdfExportComponent.current)
+      pdfExportComponent.current.save();
+    }
   };
   return (
     <div
       className="App"
       style={{
+        display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        width: "100%",
         textAlign: "center",
         marginTop: 20,
         marginBottom: 50,
       }}
     >
       <Button onClick={exportHandle}> Export</Button>
-      <PDFExport ref={pdfExportComponent} paperSize="A4">
-        <Header />
-      </PDFExport>
+      <Header />
       <Control />
-      <PDFExport ref={pdfExportComponent} paperSize="A4">
+      <PDFExport ref={pdfExportComponent} paperSize="A1">
         <TableResult />
       </PDFExport>
     </div>

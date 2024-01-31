@@ -8,38 +8,28 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import currency from "../../helpers/currency";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-  
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
+const StyledTableCell = ({ align, children }) => (
+  <TableCell style={{ fontSize: '16px', textAlign: align }}>{children}</TableCell>
+);
+
+const StyledTableRow = ({ children }) => (
+  <TableRow style={{ backgroundColor: '#f0f0f0' }}>{children}</TableRow>
+);
+
 
 export default function LoanResultTable(props) {
   return (
-    <div style={{ margin: "auto", width: "90%"}}>
+    <div style={{ width: "100%", minWidth: "1200px"}}>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <Table aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="center">Tháng</StyledTableCell>
-              <StyledTableCell align="center">Tiền gốc phải trả&nbsp;(vnd)</StyledTableCell>
-              <StyledTableCell align="center">Tiền lãi phải trả&nbsp;(vnd)</StyledTableCell>
-              <StyledTableCell align="center">Số tiền còn nợ&nbsp;(vnd)</StyledTableCell>
+              <StyledTableCell align="center">Month</StyledTableCell>
+              <StyledTableCell align="center">Principal payable&nbsp;(vnd)</StyledTableCell>
+              <StyledTableCell align="center">Interest payable&nbsp;(vnd)</StyledTableCell>
+              <StyledTableCell align="center">Outstanding amount&nbsp;(vnd)</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -48,9 +38,9 @@ export default function LoanResultTable(props) {
                 <StyledTableCell align="center" component="th" scope="row">
                   {row.month}
                 </StyledTableCell>
-                <StyledTableCell align="center">{row.principalMoney}</StyledTableCell>
-                <StyledTableCell align="center">{row.interestMoney}</StyledTableCell>
-                <StyledTableCell align="center">{row.moneyStillOwed}</StyledTableCell>
+                <StyledTableCell align="center">{currency.getVietNameCurrencyFormat(row.principalMoney)}</StyledTableCell>
+                <StyledTableCell align="center">{currency.getVietNameCurrencyFormat(row.interestMoney)}</StyledTableCell>
+                <StyledTableCell align="center">{currency.getVietNameCurrencyFormat(row.moneyStillOwed)}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

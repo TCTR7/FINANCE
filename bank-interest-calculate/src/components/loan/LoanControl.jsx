@@ -24,6 +24,7 @@ export default function LoanControl(props) {
   );
   const { values, errors, setErrors, handleInputChange } =
     useTextField(getFreshModel);
+
   const onSubmitHandle = (e) => {
     e.preventDefault();
     if (!validate()) return;
@@ -45,8 +46,13 @@ export default function LoanControl(props) {
       values.loanInterestRate > 0 ? "" : "This field must be positive ";
     tempModel.loanTerm =
       values.loanTerm > 0 ? "" : "This field must be positive ";
-    tempModel.monthlyPayment =
-      values.loanTerm > 0 ? "" : "This field must be positive ";
+    if(values.monthlyPayment < 0) {
+      tempModel.monthlyPayment = "This field must be positive "
+    }
+    const minimumMonthlyPayment = calculater.getMinimumMonthlyPayment(values.loan, values.loanTerm, values.loanInterestRate)
+    if(values.monthlyPayment < minimumMonthlyPayment) {
+      tempModel.monthlyPayment = `The value of this field must be greater than ${minimumMonthlyPayment}`
+    }
     setErrors(tempModel);
     return Object.values(tempModel).every((x) => x === "");
   };
